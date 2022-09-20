@@ -1,0 +1,131 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  background-color: black;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  padding: 16px;
+}
+
+.header > h1 {
+  text-align: center;
+  color: white;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  gap: 32px;
+  margin: 16px;
+  padding: 16px;
+  line-height: 0;
+}
+
+.canvas {
+  width: 500px;
+  height: 500px;
+}
+
+.square {
+  display: inline-block;
+  background-color: white;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.color-mode,
+.rainbow-mode,
+.eraser,
+.clear,
+.canvas-size {
+  border: 2px solid white;
+  color: white;
+  font-size: 24px;
+  padding: 24px;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.color-mode:hover,
+.rainbow-mode:hover,
+.eraser:hover,
+.clear:hover {
+  transform: scale(1.05);
+}
+
+.canvas-size {
+  border: none;
+  cursor: default;
+  padding: 0;
+  font-size: 20px;
+  margin-bottom: -20px;
+}
+
+/* slider */
+input[type="range"] {
+  height: 34px;
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 11px;
+  cursor: pointer;
+  background: #ffffff;
+}
+input[type="range"]::-webkit-slider-thumb {
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: #333333;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -8px;
+}
+
+input[type="color"],
+input[type="color"]::-webkit-color-swatch,
+input[type="color"]::-webkit-color-swatch-wrapper {
+  border: none;
+  border-radius: 50%;
+}
+
+input[type="color"] {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.footer {
+  padding: 16px;
+}
+
+.footer > a {
+  text-align: start;
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.footer > a:hover {
+  color: #5ce64e;
+}
