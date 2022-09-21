@@ -3,18 +3,12 @@ const canvasHeight = 500;
 
 let numberOfSquares = 16;
 let squareSize = canvasWidth / numberOfSquares;
-let color = "#333333"; // default color
+let color = "#008080"; // default color
 let rainbowMode = false;
 
 let canvas = document.querySelector(".canvas");
 const center = document.querySelector(".center");
 const footer = document.querySelector(".footer");
-
-const Color = Object.freeze({
-  GRAY: "#333333",
-  WHITE: "#fefefe",
-  LIGHT: "#ededed",
-});
 
 function calculateSquares() {
   /* calculate new square dimensions */
@@ -93,14 +87,19 @@ function main() {
 
   document.querySelector(".eraser").addEventListener("click", () => {
     rainbowMode = false;
-    color = Color.WHITE;
+    color = "white";
 
     // TODO: wrap in a function?
     document.querySelector(".active").classList.remove("active");
     document.querySelector(".eraser").classList.add("active");
   });
 
-  document.querySelector(".clear").addEventListener("click", clearCanvas);
+  document.querySelector(".clear").addEventListener("click", () => {
+    const clearBtn = document.querySelector(".clear");
+    clearBtn.classList.add("active");
+    setTimeout(() => clearBtn.classList.remove("active"), 150);
+    clearCanvas();
+  });
 
   document.querySelector(".slider").addEventListener("mouseup", () => {
     calculateSquares();
