@@ -1,110 +1,139 @@
-const canvasWidth = 500;
-const canvasHeight = 500;
+(function () {
+  const canvasSize = 500;
 
-let numberOfSquares = 16;
-let squareSize = canvasWidth / numberOfSquares;
-let color = "#008080"; // default color
-let rainbowMode = false;
+  // default size
+  var numberOfSquares = 16;
+  var squareSize = canvasSize / numberOfSquares;
+  // default color
+  var drawingColor = "#008080";
+  var drawRainbow = false;
+  var erase = false;
+  var lastColoredSquare = null;
 
-let canvas = document.querySelector(".canvas");
-const center = document.querySelector(".center");
-const footer = document.querySelector(".footer");
+  var canvas = document.querySelector(".canvas");
+  const center = document.querySelector(".center");
+  const colorPicker = document.querySelector(".color-picker");
+  const colorMode = document.querySelector(".color-mode");
+  const rainbowMode = document.querySelector(".rainbow-mode");
+  const eraser = document.querySelector(".eraser");
+  const clear = document.querySelector(".clear");
+  const canvasSizeText = document.querySelector(".canvas-size");
+  const slider = document.querySelector(".slider");
 
-function calculateSquares() {
-  /* calculate new square dimensions */
-  numberOfSquares = parseInt(document.querySelector(".canvas-size").innerText);
-  squareSize = canvasWidth / numberOfSquares;
-}
+  clearCanvas();
 
-function createNewCanvas() {
-  if (canvas !== null) {
-    canvas.remove();
+  colorPicker.addEventListener("change", (event) => {
+    drawingColor = event.target.value;
+  });
+
+  colorMode.addEventListener("click", () => {
+    erase = false;
+    drawRainbow = false;
+    drawingColor = colorPicker.value;
+
+    changeButtonTo(colorMode);
+  });
+
+  rainbowMode.addEventListener("click", () => {
+    erase = false;
+    drawRainbow = true;
+
+    changeButtonTo(rainbowMode);
+  });
+
+  eraser.addEventListener("click", () => {
+    erase = true;
+    drawRainbow = false;
+
+    changeButtonTo(eraser);
+  });
+
+  clear.addEventListener("click", () => {
+    clear.classList.add("active");
+    setTimeout(() => clear.classList.remove("active"), 300);
+
+    clearCanvas();
+  });
+
+  addMultipleListeners(slider, ["input", "change"], changeCanvasDimensionsText);
+
+  slider.addEventListener("mouseup", () => {
+    calculateCanvasDimensions();
+    clearCanvas();
+  });
+
+  function calculateCanvasDimensions() {
+    /* Calculate the new square dimensions. */
+    numberOfSquares = parseInt(canvasSizeText.innerText);
+    squareSize = canvasSize / numberOfSquares;
   }
-  canvas = document.createElement("div");
-  canvas.classList.add("canvas");
-  center.appendChild(canvas);
-}
 
-function clearCanvas() {
-  createNewCanvas();
+  function createNewCanvas() {
+    if (canvas !== null) {
+      canvas.remove();
+    }
+    canvas = document.createElement("div");
+    canvas.classList.add("canvas");
+    center.appendChild(canvas);
+  }
 
-  /* generate new blank squares on canvas */
-  for (let i = 0; i < numberOfSquares * numberOfSquares; i++) {
+  function drawSquare() {
+    /* Draw square on the canvas. */
     const square = document.createElement("div");
-    square.setAttribute("draggable", false);
     square.classList.add("square");
+    square.setAttribute("draggable", false);
     square.style.width = squareSize.toString() + "px";
     square.style.height = squareSize.toString() + "px";
     canvas.appendChild(square);
   }
 
-  /* add coloring on mousemove and mousedown */
-  // TODO: format?
-  ["mousemove", "mousedown"].forEach(function (e) {
-    canvas.addEventListener(e, (event) => {
-      if (event.buttons === 1) {
-        if (rainbowMode) {
-          event.target.style.backgroundColor =
-            "#" + (((1 << 24) * Math.random()) | 0).toString(16);
-        } else {
-          event.target.style.backgroundColor = color;
-        }
+  function clearCanvas() {
+    createNewCanvas();
+
+    /* Generate new blank squares on canvas */
+    for (let i = 0; i < numberOfSquares * numberOfSquares; i++) {
+      drawSquare();
+    }
+
+    /* Add coloring on mousemove and mousedown on the new canvas */
+    addMultipleListeners(canvas, ["mousemove", "mousedown"], draw);
+  }
+
+  function draw(event) {
+    /* Draw color on the canvas */
+    if (event.buttons === 1) {
+      // fixed generating a new rainbow color within the same square
+      if (drawRainbow && lastColoredSquare !== event.target) {
+        event.target.style.backgroundColor = getRandomColor();
+      } else if (erase) {
+        event.target.style.backgroundColor = "white";
+      } else if (!drawRainbow) {
+        event.target.style.backgroundColor = drawingColor;
       }
-    });
-  });
-}
+      lastColoredSquare = event.target;
+    }
+  }
 
-/* change text above the slider */
-function changeCanvasDimensionsText(size) {
-  document.querySelector(".canvas-size").innerText =
-    size.toString() + " x " + size.toString();
-}
+  function changeCanvasDimensionsText(event) {
+    /* Change the canvas dimensions text above the slider. */
+    const size = event.target.value;
+    document.querySelector(".canvas-size").innerText =
+      size.toString() + " x " + size.toString();
+  }
 
-function main() {
-  clearCanvas();
-
-  document
-    .querySelector(".color-picker")
-    .addEventListener("change", (event) => {
-      color = event.target.value;
-    });
-
-  document.querySelector(".color-mode").addEventListener("click", (event) => {
-    rainbowMode = false;
-    color = document.querySelector(".color-picker").value;
-
+  function changeButtonTo(button) {
     document.querySelector(".active").classList.remove("active");
-    document.querySelector(".color-mode").classList.add("active");
-  });
+    button.classList.add("active");
+  }
 
-  document.querySelector(".rainbow-mode").addEventListener("click", () => {
-    // TODO: fix changing color while within the same square
-    rainbowMode = true;
+  function addMultipleListeners(element, events, handler) {
+    /* Add multiple listening 'events' to the 'element' with function 'handler'. */
+    events.forEach((e) =>
+      element.addEventListener(e, (event) => handler(event)),
+    );
+  }
 
-    document.querySelector(".active").classList.remove("active");
-    document.querySelector(".rainbow-mode").classList.add("active");
-  });
-
-  document.querySelector(".eraser").addEventListener("click", () => {
-    rainbowMode = false;
-    color = "white";
-
-    // TODO: wrap in a function?
-    document.querySelector(".active").classList.remove("active");
-    document.querySelector(".eraser").classList.add("active");
-  });
-
-  document.querySelector(".clear").addEventListener("click", () => {
-    const clearBtn = document.querySelector(".clear");
-    clearBtn.classList.add("active");
-    setTimeout(() => clearBtn.classList.remove("active"), 150);
-    clearCanvas();
-  });
-
-  document.querySelector(".slider").addEventListener("mouseup", () => {
-    calculateSquares();
-    clearCanvas();
-  });
-}
-
-main();
+  function getRandomColor() {
+    return "#" + (((1 << 24) * Math.random()) | 0).toString(16);
+  }
+})();
