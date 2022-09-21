@@ -7,7 +7,7 @@ Etch a sketch game made with HTML, CSS and JS.
 1. Clone the repository
 
 ```shell
-git clone
+git clone https://github.com/H4wk507/Etch-a-Sketch.git
 ```
 
 2. Open with a browser

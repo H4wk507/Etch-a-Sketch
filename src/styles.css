@@ -1,9 +1,17 @@
-* {
+:root {
+  --primary-dark: #333333;
+  --primary-light: #ededed;
+  --secondary-light: #fefefe;
+}
+
+*,
+*::before,
+*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
-  background-color: black;
+  background-color: var(--primary-light);
 }
 
 body {
@@ -18,7 +26,8 @@ body {
 
 .header > h1 {
   text-align: center;
-  color: white;
+  font-size: 64px;
+  color: var(--primary-dark);
 }
 
 .center {
@@ -26,20 +35,22 @@ body {
   justify-content: center;
   align-items: center;
   flex: 1;
-  gap: 32px;
-  margin: 16px;
-  padding: 16px;
+  gap: 100px;
   line-height: 0;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .canvas {
+  box-shadow: rgb(0 0 0 / 50%) 10px 10px 10px;
   width: 500px;
   height: 500px;
 }
 
 .square {
   display: inline-block;
-  background-color: white;
+  background-color: var(--secondary-light);
+  user-select: none;
 }
 
 .options {
@@ -50,31 +61,27 @@ body {
   gap: 32px;
 }
 
-.color-mode,
-.rainbow-mode,
-.eraser,
-.clear,
-.canvas-size {
-  border: 2px solid white;
-  color: white;
-  font-size: 24px;
-  padding: 24px;
+button {
+  border: 1px solid var(--primary-dark);
+  color: var(--primary-dark);
+  font-size: 20px;
+  padding: 16px;
   text-align: center;
   width: 100%;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 5px;
 }
-.color-mode:hover,
-.rainbow-mode:hover,
-.eraser:hover,
-.clear:hover {
+
+button:hover {
   transform: scale(1.05);
 }
 
+button.active {
+  background-color: var(--primary-dark);
+  color: var(--primary-light);
+}
+
 .canvas-size {
-  border: none;
-  cursor: default;
-  padding: 0;
   font-size: 20px;
   margin-bottom: -20px;
 }
@@ -89,13 +96,16 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-runnable-track {
   height: 11px;
   cursor: pointer;
-  background: #ffffff;
+  border: 1px solid var(--primary-dark);
+  border-radius: 15px;
+  background: var(primary-light);
 }
+
 input[type="range"]::-webkit-slider-thumb {
   height: 26px;
   width: 26px;
   border-radius: 15px;
-  background: #333333;
+  background: var(--primary-dark);
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -8px;
@@ -115,13 +125,17 @@ input[type="color"] {
   cursor: pointer;
 }
 
+input[type="color"]:hover {
+  transform: scale(1.05);
+}
+
 .footer {
   padding: 16px;
 }
 
 .footer > a {
   text-align: start;
-  color: white;
+  color: var(--primary-dark);
   font-size: 24px;
   text-decoration: none;
 }

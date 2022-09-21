@@ -5,7 +5,6 @@ let numberOfSquares = 16;
 let squareSize = canvasWidth / numberOfSquares;
 let color = "#333333"; // default color
 let rainbowMode = false;
-let currOption = document.querySelector(".color-mode");
 
 let canvas = document.querySelector(".canvas");
 const center = document.querySelector(".center");
@@ -13,8 +12,8 @@ const footer = document.querySelector(".footer");
 
 const Color = Object.freeze({
   GRAY: "#333333",
-  WHITE: "#ffffff",
-  BLACK: "#000000",
+  WHITE: "#fefefe",
+  LIGHT: "#ededed",
 });
 
 function calculateSquares() {
@@ -68,7 +67,6 @@ function changeCanvasDimensionsText(size) {
 }
 
 function main() {
-  currOption.style.backgroundColor = Color.GRAY;
   clearCanvas();
 
   document
@@ -81,26 +79,25 @@ function main() {
     rainbowMode = false;
     color = document.querySelector(".color-picker").value;
 
-    currOption.style.backgroundColor = Color.BLACK;
-    currOption = document.querySelector(".color-mode");
-    currOption.style.backgroundColor = Color.GRAY;
+    document.querySelector(".active").classList.remove("active");
+    document.querySelector(".color-mode").classList.add("active");
   });
 
   document.querySelector(".rainbow-mode").addEventListener("click", () => {
+    // TODO: fix changing color while within the same square
     rainbowMode = true;
 
-    currOption.style.backgroundColor = Color.BLACK;
-    currOption = document.querySelector(".rainbow-mode");
-    currOption.style.backgroundColor = Color.GRAY;
+    document.querySelector(".active").classList.remove("active");
+    document.querySelector(".rainbow-mode").classList.add("active");
   });
 
   document.querySelector(".eraser").addEventListener("click", () => {
+    rainbowMode = false;
     color = Color.WHITE;
 
-    // TODO: write a function for this
-    currOption.style.backgroundColor = Color.BLACK;
-    currOption = document.querySelector(".eraser");
-    currOption.style.backgroundColor = Color.GRAY;
+    // TODO: wrap in a function?
+    document.querySelector(".active").classList.remove("active");
+    document.querySelector(".eraser").classList.add("active");
   });
 
   document.querySelector(".clear").addEventListener("click", clearCanvas);
