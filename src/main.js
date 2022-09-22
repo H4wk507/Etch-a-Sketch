@@ -2,15 +2,15 @@
   const canvasSize = 500;
 
   // default size
-  var numberOfSquares = 16;
-  var squareSize = canvasSize / numberOfSquares;
+  let numberOfSquares = 16;
+  let squareSize = canvasSize / numberOfSquares;
   // default color
-  var drawingColor = "#008080";
-  var drawRainbow = false;
-  var erase = false;
-  var lastColoredSquare = null;
+  let drawingColor = "#008080";
+  let drawRainbow = false;
+  let erase = false;
+  let lastColoredSquare = null;
 
-  var canvas = document.querySelector(".canvas");
+  let canvas = document.querySelector(".canvas");
   const center = document.querySelector(".center");
   const colorPicker = document.querySelector(".color-picker");
   const colorMode = document.querySelector(".color-mode");
