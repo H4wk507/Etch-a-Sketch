@@ -1,21 +1,11 @@
 # Etch a Sketch
 
-Etch a sketch game made with HTML, CSS and JS.
+Etch a sketch app made with React + TS.
 
 ## Play
 
-1. Clone the repository
-
-```shell
-git clone https://github.com/H4wk507/Etch-a-Sketch.git
-```
-
-2. Open with a browser
-
-```shell
-xdg-open index.html
-```
+[Preview](https://h4wk507.github.io/Etch-a-Sketch/) of the app.
 
 ## License
 
-Licensed under MIT.
+Licensed under [MIT](./LICENSE).
