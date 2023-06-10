@@ -1,0 +1,18 @@
+.color-picker {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+
+  &::-webkit-color-swatch,
+  &::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

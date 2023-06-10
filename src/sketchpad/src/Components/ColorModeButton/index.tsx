@@ -1,4 +1,5 @@
 import { Mode } from "../../helpers/types";
+import styles from "../Options/style.module.scss";
 
 interface ColorModeButtonProps {
   mode: Mode;
@@ -16,7 +17,7 @@ export default function ColorModeButton({
   return (
     <button
       onClick={handleClick}
-      className={`color-mode ${mode === "color" && "active"}`}
+      className={`${mode === "color" && styles.active}`}
     >
       Color mode
     </button>

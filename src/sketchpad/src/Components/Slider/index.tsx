@@ -1,6 +1,7 @@
 import { Square } from "../../helpers/types";
 import { getCanvas } from "../../helpers/utils";
 import { ChangeEvent } from "react";
+import styles from "./style.module.scss";
 
 interface SliderProps {
   numberOfSideSquares: number;
@@ -21,7 +22,7 @@ export default function Slider({
   return (
     <input
       onChange={handleChange}
-      className="slider"
+      className={styles.slider}
       type="range"
       value={numberOfSideSquares}
       min="1"

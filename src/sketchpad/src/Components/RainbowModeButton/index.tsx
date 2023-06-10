@@ -1,4 +1,5 @@
 import { Mode } from "../../helpers/types";
+import styles from "../Options/style.module.scss";
 
 interface RainbowModeButtonProps {
   mode: Mode;
@@ -16,7 +17,7 @@ export default function RainbowModeButton({
   return (
     <button
       onClick={handleClick}
-      className={`rainbow-mode ${mode === "rainbow" && "active"}`}
+      className={`${mode === "rainbow" && styles.active}`}
     >
       Rainbow mode
     </button>

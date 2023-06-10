@@ -8,6 +8,7 @@ import EraserButton from "../EraserButton";
 import RainbowModeButton from "../RainbowModeButton";
 import Slider from "../Slider";
 import { initialCanvasSideSize } from "../../helpers/constants";
+import styles from "./style.module.scss";
 
 interface OptionsProps {
   color: string;
@@ -29,7 +30,7 @@ export default function Options({
   );
 
   return (
-    <div className="options">
+    <div className={styles.options}>
       <ColorPicker color={color} setColor={setColor} />
       <ColorModeButton mode={mode} setMode={setMode} />
       <RainbowModeButton mode={mode} setMode={setMode} />

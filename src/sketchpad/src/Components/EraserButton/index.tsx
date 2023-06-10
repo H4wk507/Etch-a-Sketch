@@ -1,4 +1,5 @@
 import { Mode } from "../../helpers/types";
+import styles from "../Options/style.module.scss";
 
 interface EraserButtonProps {
   mode: Mode;
@@ -13,7 +14,7 @@ export default function EraserButton({ mode, setMode }: EraserButtonProps) {
   return (
     <button
       onClick={handleClick}
-      className={`eraser ${mode === "eraser" && "active"}`}
+      className={`${mode === "eraser" && styles.active}`}
     >
       Eraser
     </button>

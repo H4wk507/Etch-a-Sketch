@@ -4,6 +4,7 @@ import { Mode, Square } from "../../helpers/types";
 import { getCanvas } from "../../helpers/utils";
 import Options from "../Options";
 import Canvas from "../Canvas";
+import styles from "./style.module.scss";
 
 export default function Main() {
   const [canvas, setCanvas] = useState<Square[]>(
@@ -13,7 +14,7 @@ export default function Main() {
   const [color, setColor] = useState<string>("#008080");
 
   return (
-    <div className="center">
+    <div className={styles.center}>
       <Options
         color={color}
         setColor={setColor}

@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import styles from "./style.module.scss";
 
 interface ColorPickerProps {
   color: string;
@@ -15,7 +16,7 @@ export default function ColorPicker({ color, setColor }: ColorPickerProps) {
       onChange={handleChange}
       type="color"
       value={color}
-      className="color-picker"
+      className={styles["color-picker"]}
     />
   );
 }

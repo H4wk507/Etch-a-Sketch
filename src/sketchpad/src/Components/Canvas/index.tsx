@@ -1,6 +1,7 @@
 import { MouseEvent, useState } from "react";
 import { getRandomColor } from "../../helpers/utils";
 import { Mode, Square } from "../../helpers/types";
+import styles from "./style.module.scss";
 
 interface CanvasProps {
   canvas: Square[];
@@ -49,12 +50,12 @@ export default function Canvas({
   };
 
   return (
-    <div onMouseMove={draw} onMouseDown={draw} className="canvas">
+    <div onMouseMove={draw} onMouseDown={draw} className={styles.canvas}>
       {canvas.map((square, i) => (
         <div
           id={i.toString()}
           key={i}
-          className="square"
+          className={styles.square}
           style={{
             backgroundColor: square.color,
             width: square.size.toString() + "px",

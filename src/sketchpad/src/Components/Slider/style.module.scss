@@ -1,0 +1,23 @@
+.slider {
+  height: 34px;
+  appearance: none;
+  width: 100%;
+
+  &::-webkit-slider-runnable-track {
+    height: 11px;
+    cursor: pointer;
+    border: 1px solid var(--teal);
+    border-radius: 15px;
+    background: var(primary-light);
+  }
+
+  &::-webkit-slider-thumb {
+    height: 26px;
+    width: 26px;
+    border-radius: 15px;
+    background: var(--teal);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8px;
+  }
+}
